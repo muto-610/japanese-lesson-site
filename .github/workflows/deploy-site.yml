@@ -1,0 +1,55 @@
+
+name: Deploy Japanese with Ted
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: japanese-lesson-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: arn:aws:iam::711107785800:role/JapaneseLessonGitHubDeployRole
+          aws-region: ap-northeast-1
+
+      - name: Deploy via SSM
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          INSTANCE_ID="i-0f4682b17a510433a"
+
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids "$INSTANCE_ID" \
+            --document-name "AWS-RunShellScript" \
+            --parameters '{"commands":["set -eu","runuser -u ec2-user -- git -C /home/ec2-user/japanese-lesson-site pull --ff-only origin main","mkdir -p /home/ec2-user/nginx-backups","cp -p /usr/share/nginx/html/index.html /home/ec2-user/nginx-backups/index.html.predeploy","install -m 644 /home/ec2-user/japanese-lesson-site/index.html /usr/share/nginx/html/index.html","code=$(curl -sS -o /dev/null -w \"%{http_code}\" --max-time 5 http://localhost/)","if [ \"$code\" != \"200\" ]; then cp -p /home/ec2-user/nginx-backups/index.html.predeploy /usr/share/nginx/html/index.html; echo \"HTTP check failed: $code; restored backup\"; exit 1; fi","echo \"Deploy OK: HTTP $code\""]}' \
+            --query "Command.CommandId" \
+            --output text)
+
+          echo "SSM Command ID: $COMMAND_ID"
+
+          set +e
+          aws ssm wait command-executed \
+            --command-id "$COMMAND_ID" \
+            --instance-id "$INSTANCE_ID"
+          RESULT=$?
+          set -e
+
+          aws ssm get-command-invocation \
+            --command-id "$COMMAND_ID" \
+            --instance-id "$INSTANCE_ID" \
+            --query '{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}' \
+            --output json
+
+          exit "$RESULT"
