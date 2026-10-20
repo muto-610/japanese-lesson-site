@@ -1,418 +1,569 @@
-<!-- deploy-test-20261021 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f8ff">
+  <meta name="theme-color" content="#f7fbff">
   <meta name="description" content="Friendly, personalized online Japanese lessons with Ted. Build confidence in Japanese conversation or start learning from the beginning.">
-  <title>Ted Japanese Lesson | Learn Japanese with Confidence</title>
+  <title>Ted Japanese Lesson | Learn Japanese. Feel at home.</title>
   <style>
-    :root {
-      color-scheme: light;
-      --ink: #17375d;
-      --muted: #536b86;
-      --blue: #2766ac;
-      --blue-dark: #164b88;
-      --pale: #edf5ff;
-      --paper: #fff;
-      --border: #dce8f7;
-      --shadow: 0 20px 55px rgba(35, 79, 135, .085);
-      --radius: 22px;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: #f8fbff; color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif; line-height: 1.7; }
-    a { color: inherit; }
-    a:focus-visible { outline: 3px solid #f3b45e; outline-offset: 4px; border-radius: 5px; }
-    .skip-link { position: absolute; z-index: 20; left: 12px; top: -70px; background: var(--ink); color: white; padding: 9px 15px; border-radius: 10px; }
-    .skip-link:focus { top: 12px; }
-    .container { width: min(1100px, calc(100% - 44px)); margin: 0 auto; }
-    .site-header { position: relative; z-index: 2; background: rgba(255,255,255,.93); border-bottom: 1px solid var(--border); }
-    .header-inner { min-height: 77px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; gap: 10px; align-items: center; text-decoration: none; font-weight: 800; letter-spacing: -.04em; font-size: 1.19rem; white-space: nowrap; }
-    .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; background: var(--blue); color: #fff; font-size: .91rem; letter-spacing: 0; border-radius: 11px; }
-    .nav { display: flex; align-items: center; gap: clamp(14px, 3vw, 34px); font-weight: 600; font-size: .91rem; }
-    .nav a { text-decoration: none; color: #46617e; }
-    .nav a:hover { color: var(--blue); }
-    .nav .nav-cta { padding: 9px 18px; background: var(--blue); color: white; border-radius: 999px; }
-    .nav .nav-cta:hover { background: var(--blue-dark); color: #fff; }
-    .hero { position: relative; overflow: hidden; padding: clamp(64px, 9vw, 116px) 0 90px; background: radial-gradient(circle at 84% 15%, #dcecff 0, transparent 33%), linear-gradient(170deg, #f4f9ff, #eaf4ff 72%, #f8fbff); }
-    .hero::after { content: ""; position: absolute; width: 380px; height: 380px; left: -250px; bottom: -240px; border: 70px solid rgba(83, 143, 208, .09); border-radius: 50%; pointer-events: none; }
-    .hero-grid { display: grid; grid-template-columns: 1.16fr .84fr; gap: clamp(32px, 6vw, 90px); align-items: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px; color: var(--blue); font-size: .81rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; }
-    .eyebrow::before { content: ""; height: 7px; width: 7px; background: #6aa6e9; border-radius: 50%; }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 { margin-bottom: 20px; font-size: clamp(2.75rem, 5.45vw, 4.6rem); line-height: 1.12; letter-spacing: -.065em; }
-    h1 span { color: var(--blue); }
-    .lead { max-width: 570px; margin-bottom: 27px; color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.2rem); line-height: 1.85; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .button { display: inline-flex; justify-content: center; align-items: center; gap: 10px; border-radius: 12px; padding: 13px 22px; font-weight: 750; text-decoration: none; font-size: .94rem; transition: transform .16s ease, background .16s ease; }
-    .button:hover { transform: translateY(-2px); }
-    .button-primary { background: var(--blue); color: white; box-shadow: 0 9px 22px rgba(39, 102, 172, .18); }
-    .button-primary:hover { background: var(--blue-dark); }
-    .button-secondary { background: rgba(255,255,255,.86); border: 1px solid #c9def4; color: var(--blue-dark); }
-    .button-secondary:hover { background: white; }
-    .hero-note { margin: 19px 0 0; font-size: .88rem; color: #637c97; }
-    .art { position: relative; min-height: 400px; display: grid; place-items: center; }
-    .art-circle { position: absolute; width: min(360px, 100%); aspect-ratio: 1; border-radius: 50%; background: #d8eafb; border: 1px solid rgba(91, 152, 214, .18); }
-    .art-circle::before { content: ""; position: absolute; inset: 21px; border: 1.5px dashed rgba(52, 110, 177, .22); border-radius: 50%; }
-    .language-card { position: relative; width: min(310px, 92%); background: rgba(255,255,255,.97); border: 1px solid #e1ecf8; border-radius: 25px; box-shadow: var(--shadow); padding: 35px 30px 31px; transform: rotate(-4deg); }
-    .language-card .card-top { color: #7692ad; font-size: .73rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
-    .jp-big { display: block; font-size: clamp(2.7rem, 6vw, 3.5rem); font-weight: 800; letter-spacing: -.08em; color: var(--blue); margin: 18px 0 5px; }
-    .pronunciation { color: var(--muted); margin-bottom: 15px; font-size: .9rem; }
-    .card-rule { border: 0; height: 1px; background: var(--border); margin: 15px 0; }
-    .language-card .translation { margin: 0; font-size: 1.15rem; font-weight: 750; }
-    .floating { position: absolute; font-weight: 800; border-radius: 14px; background: white; color: var(--blue); border: 1px solid var(--border); box-shadow: 0 12px 30px rgba(34, 87, 139, .1); }
-    .floating-one { top: 27px; right: 5px; padding: 10px 15px; transform: rotate(7deg); }
-    .floating-two { bottom: 31px; left: 0; padding: 9px 15px; transform: rotate(-9deg); }
-    .section { padding: 88px 0; }
-    .section-heading { max-width: 650px; margin-bottom: 36px; }
-    .section-heading h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.2; letter-spacing: -.045em; margin-bottom: 12px; }
-    .section-heading p:last-child { color: var(--muted); margin-bottom: 0; }
-    .about-layout { display: grid; grid-template-columns: 280px 1fr; gap: clamp(26px, 6vw, 78px); align-items: center; }
-    .portrait-placeholder { min-height: 295px; border-radius: var(--radius); border: 1px dashed #a5c5e8; background: linear-gradient(145deg, #deecff, #f4f9ff); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
-    .portrait-placeholder .avatar { display: grid; place-items: center; width: 103px; height: 103px; border-radius: 50%; background: #bed9f5; color: #265d9b; font-size: 2.4rem; font-weight: 800; margin-bottom: 17px; }
-    .portrait-placeholder p { margin-bottom: 0; font-size: .83rem; color: #557997; }
-    .intro-text p { color: var(--muted); max-width: 650px; }
-    .intro-text strong { color: var(--ink); }
-    .placeholder-note { margin-top: 18px; background: #f1f6fd; border-left: 3px solid #9cc0e9; border-radius: 0 10px 10px 0; padding: 12px 15px; font-size: .87rem; color: #52708f; }
-    .lessons { background: #eef5fd; border-top: 1px solid #e6eff8; border-bottom: 1px solid #e6eff8; }
-    .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-    .lesson-card { background: var(--paper); padding: 32px; border-radius: var(--radius); border: 1px solid #e2ecf7; box-shadow: 0 12px 35px rgba(24, 71, 119, .045); }
-    .lesson-icon { width: 49px; height: 49px; display: grid; place-items: center; background: #eaf3fe; border-radius: 14px; font-size: 1.32rem; font-weight: 700; color: var(--blue); margin-bottom: 22px; }
-    .lesson-card h3 { font-size: 1.32rem; letter-spacing: -.02em; margin-bottom: 11px; }
-    .lesson-card p { margin: 0; color: var(--muted); }
-    .lesson-jp { font-size: .78rem; color: var(--blue); font-weight: 750; letter-spacing: .035em; margin-bottom: 8px !important; }
-    .booking-wrap { background: linear-gradient(135deg, #1c548e, #286fac); border-radius: 28px; padding: clamp(31px, 6vw, 65px); text-align: center; color: #fff; box-shadow: 0 17px 46px rgba(19, 71, 130, .13); }
-    .booking-wrap .eyebrow { color: #d0e6ff; }
-    .booking-wrap .eyebrow::before { background: #bcdcff; }
-    .booking-wrap h2 { font-size: clamp(2rem, 3.5vw, 2.9rem); line-height: 1.2; letter-spacing: -.04em; margin-bottom: 14px; }
-    .booking-wrap p { max-width: 600px; margin: 0 auto 27px; color: #e1efff; }
-    .booking-wrap .button { background: white; color: #19538e; }
-    .booking-wrap .button:hover { background: #eaf4ff; }
-    .booking-placeholder { max-width: 570px; margin: 18px auto 0 !important; font-size: .79rem; color: #e3efff !important; }
-    .site-footer { padding: 30px 0; border-top: 1px solid var(--border); }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #68809a; font-size: .84rem; }
-    .footer-inner p { margin: 0; }
-    .footer-inner a { text-decoration: none; color: var(--blue); font-weight: 700; }
-    @media (max-width: 780px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero { padding: 65px 0 66px; }
-      .art { min-height: 335px; }
-      .art-circle { width: 300px; }
-      .language-card { max-width: 285px; }
-      .about-layout { grid-template-columns: 1fr; gap: 26px; }
-      .portrait-placeholder { min-height: 220px; max-width: 350px; }
-      .nav { gap: 14px; }
-      .nav a:nth-child(2) { display: none; }
-    }
-    @media (max-width: 530px) {
-      .container { width: min(100% - 34px, 1100px); }
-      .header-inner { min-height: 69px; gap: 10px; }
-      .brand { font-size: 1rem; gap: 8px; }
-      .brand-mark { width: 31px; height: 31px; }
-      .nav a:not(.nav-cta) { display: none; }
-      .nav .nav-cta { font-size: .79rem; padding: 9px 13px; }
-      .hero { padding: 53px 0 53px; }
-      h1 { font-size: clamp(2.55rem, 11vw, 3.3rem); }
-      .hero-actions .button { flex: 1 1 100%; }
-      .art { min-height: 310px; }
-      .art-circle { width: 265px; }
-      .language-card { width: 245px; padding: 25px; }
-      .jp-big { font-size: 2.85rem; }
-      .floating-one { right: 0; top: 9px; }
-      .floating-two { left: 0; bottom: 7px; }
-      .section { padding: 64px 0; }
-      .lesson-grid { grid-template-columns: 1fr; gap: 15px; }
-      .lesson-card { padding: 25px; }
-      .footer-inner { flex-direction: column; text-align: center; }
-      .booking-wrap { border-radius: 20px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .button { transition: none; }
-    }
-
-    /* The opening animation is self-contained: no external assets needed. */
-    .intro-overlay {
-      position: fixed; inset: 0; z-index: 1000;
-      display: none; align-items: center; justify-content: center;
-      overflow: hidden; isolation: isolate;
-      background: radial-gradient(circle at 28% 20%, #ffffff 0, #eff7ff 38%, #d9edff 100%);
-      transition: opacity .75s ease, visibility .75s ease;
-    }
-    .js-enabled .intro-overlay { display: flex; }
-    .intro-overlay::before, .intro-overlay::after {
-      content: ""; position: absolute; width: 54vmax; aspect-ratio: 1;
-      border-radius: 50%; z-index: -1; pointer-events: none;
-    }
-    .intro-overlay::before { top: -31vmax; right: -17vmax; background: #c4e5ff; opacity: .55; }
-    .intro-overlay::after { left: -27vmax; bottom: -33vmax; background: #d6e7ff; opacity: .75; }
-    .intro-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .intro-kana-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .intro-kana {
-      position: absolute; left: var(--left); top: 0;
-      font-size: var(--size); color: var(--color);
-      font-weight: 900; line-height: 1; opacity: 0;
-      text-shadow: 0 8px 22px rgba(48, 87, 139, .10);
-      white-space: nowrap; user-select: none;
-      animation: hiragana-fall var(--duration) var(--delay) cubic-bezier(.15,.12,.7,.92) both;
-      will-change: transform, opacity;
-    }
-    @keyframes hiragana-fall {
-      0% { transform: translate3d(0,-18vh,0) rotate(var(--start-rotate)) scale(.7); opacity: 0; }
-      12% { opacity: 1; }
-      88% { opacity: 1; }
-      100% { transform: translate3d(var(--drift),115vh,0) rotate(var(--end-rotate)) scale(1.13); opacity: 0; }
-    }
-    .intro-title-group {
-      position: relative; z-index: 2; text-align: center;
-      padding: 28px; max-width: 94vw;
-      opacity: 0; transform: translateY(22px) scale(.85); filter: blur(9px);
-      transition: opacity .7s ease, transform .85s cubic-bezier(.18,.86,.26,1.18), filter .8s ease;
-      pointer-events: none;
-    }
-    .intro-overlay.title-visible .intro-title-group { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    .intro-title-group .intro-kicker {
-      font-size: clamp(.78rem,2vw,.98rem); color: #416e9a;
-      font-weight: 750; letter-spacing: .21em; margin-bottom: 16px;
-    }
-    .intro-title-group .intro-final-title {
-      margin: 0; color: #164b8d;
-      font-size: clamp(2.9rem, 8.3vw, 6.8rem); letter-spacing: -.075em;
-      font-weight: 850; line-height: 1.03;
-      text-shadow: 0 14px 42px rgba(74, 125, 193, .12);
-    }
-    .intro-title-group .intro-final-title strong {
-      background: linear-gradient(90deg,#2471b8 0%,#7b60c4 50%,#e06fa9 100%);
-      color: transparent; background-clip: text; -webkit-background-clip: text;
-    }
-    .intro-title-group .intro-subtitle {
-      margin: 22px auto 0; color: #527493; font-size: clamp(.91rem, 2.4vw, 1.15rem);
-      letter-spacing: .015em;
-    }
-    .intro-skip {
-      position: absolute; z-index: 4; top: max(22px, env(safe-area-inset-top)); right: 24px;
-      border: 1px solid #bcd6f1; background: rgba(255,255,255,.8);
-      color: #305f8d; font: inherit; font-size: .83rem; font-weight: 700;
-      padding: 9px 16px; border-radius: 999px; cursor: pointer;
-      transition: background .2s ease;
-    }
-    .intro-skip:hover { background: #fff; }
-    .intro-skip:focus-visible, .intro-replay:focus-visible { outline: 3px solid #e59f45; outline-offset: 3px; }
-    .intro-replay {
-      display: none; cursor: pointer; margin-left: 10px; background: transparent;
-      color: var(--blue); border: 0; padding: 4px 0; font: inherit; font-weight: 750;
-      text-decoration: underline; text-underline-offset: 3px;
-    }
-    .js-enabled .intro-replay { display: inline; }
-    .intro-active { overflow: hidden; }
-    @media (max-width: 530px) {
-      .intro-skip { right: 14px; top: 14px; }
-      .intro-title-group .intro-final-title { font-size: clamp(2.65rem, 13.8vw, 4.4rem); }
-      .intro-title-group .intro-kicker { letter-spacing: .13em; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .intro-overlay { display: none !important; }
-      .intro-replay { display: none !important; }
-      .intro-kana { animation: none !important; }
-    }
+    :root { color-scheme: light; --paper:#f7fbff; --white:#fff; --ink:#17375d; --muted:#536b86; --blue:#2766ac; --navy:#174d83; --mint:#e5f2ff; --line:#dce8f7; --ease:cubic-bezier(.22,1,.36,1); }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:108px; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif; line-height:1.7; -webkit-font-smoothing:antialiased; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    button { font:inherit; }
+    button,a,summary { touch-action:manipulation; }
+    a { color:inherit; text-decoration:none; }
+    button { color:inherit; }
+    button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #eb9a41; outline-offset:5px; }
+    button { cursor:pointer; }
+    h1,h2,h3,p { margin:0; }
+    main:focus { outline:none; }
+    svg { display:block; }
+    ::selection { background:#cce0ff; color:#17375d; }
+    .shell { width:min(1240px,calc(100% - 96px)); margin-inline:auto; }
+    .skip-link { position:fixed; top:16px; left:16px; z-index:120; padding:12px 20px; background:var(--ink); color:#fff; border-radius:8px; transform:translateY(-160%); }
+    .skip-link:focus { transform:none; }
+    .site-header { position:sticky; top:0; z-index:30; border-bottom:1px solid transparent; background:rgba(247,251,255,.96); transition:background .4s,border-color .4s; }
+    .site-header.scrolled { background:rgba(247,251,255,.98); border-color:var(--line); }
+    .header-inner { min-height:92px; display:flex; align-items:center; justify-content:space-between; gap:30px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .brand-symbol { display:grid; place-items:center; width:43px; height:43px; border-radius:14px; background:var(--blue); color:#fff; font-size:24px; font-weight:800; line-height:1; box-shadow:0 7px 17px #2766ac2b; }
+    .brand-text { font-size:17px; font-weight:650; letter-spacing:-.035em; line-height:1.17; }
+    .brand-text small { display:block; font-size:10px; font-weight:500; letter-spacing:.19em; margin-top:5px; text-transform:uppercase; }
+    .nav { display:flex; align-items:center; gap:34px; font-size:13px; font-weight:550; }
+    .nav-link { position:relative; padding:8px 0; }
+    .nav-link::after { content:""; position:absolute; bottom:3px; left:0; width:100%; height:1px; background:var(--ink); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease); }
+    .nav-link:hover::after,.nav-link[aria-current="location"]::after { transform:scaleX(1); }
+    .nav-book { display:flex; align-items:center; gap:22px; padding:11px 19px; border:1px solid #c8ddf3; border-radius:50px; background:#fff; color:var(--blue); transition:background .3s,color .3s,border-color .3s; }
+    .nav-book:hover { background:var(--blue); border-color:var(--blue); color:#fff; }
+    .arrow { width:18px; height:18px; flex:none; }
+    .hero { position:relative; overflow:hidden; background:radial-gradient(circle at 85% 10%,#dfedff 0,transparent 34%),linear-gradient(165deg,#f9fcff 0%,#edf6ff 73%,#f7fbff 100%); }
+    .hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:26px; align-items:center; min-height:690px; padding-top:50px; padding-bottom:62px; }
+    .hero-copy { position:relative; z-index:2; padding-bottom:12px; }
+    .eyebrow { display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:.1em; font-weight:750; text-transform:uppercase; color:#3d6fa3; }
+    .status-dot { width:7px; height:7px; background:#74a9dc; border-radius:50%; flex:none; }
+    .hero .eyebrow { margin-bottom:31px; }
+    h1 { font-size:clamp(54px,5.7vw,79px); font-weight:700; letter-spacing:-.06em; line-height:1.12; }
+    .title-line { display:block; }
+    .serif { font-family:inherit; font-style:normal; font-weight:inherit; letter-spacing:inherit; }
+    .hero-emphasis { display:inline-block; position:relative; color:var(--blue); padding-bottom:14px; }
+    .underline { position:absolute; left:0; bottom:0; width:98%; height:15px; overflow:visible; }
+    .underline path { stroke-dasharray:430; stroke-dashoffset:0; }
+    .hero-lead { max-width:450px; font-size:16px; line-height:1.88; color:var(--muted); margin-top:22px; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:19px; align-items:center; margin-top:31px; }
+    .button { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:25px; border:1px solid transparent; border-radius:14px; padding:16px 24px; font-size:13px; font-weight:750; line-height:1.35; overflow:hidden; transition:background .35s,box-shadow .4s,transform .4s var(--ease); }
+    .button .arrow { transition:transform .4s var(--ease); }
+    .button:hover .arrow { transform:translate(3px,-2px); }
+    .button-primary { color:#fff; background:var(--blue); }
+    .button-primary:hover { background:#164b88; box-shadow:0 8px 24px #2766ac2b; transform:translateY(-2px); }
+    .text-link { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:650; border-bottom:1px solid #b6cde7; padding:8px 0; transition:color .25s,border-color .25s; }
+    .text-link:hover { color:var(--blue); border-color:var(--blue); }
+    .hero-note { margin-top:24px; display:flex; gap:8px; align-items:center; color:#637c97; font-size:11px; }
+    .hero-note svg { width:14px; height:14px; }
+    .hero-art { position:relative; display:grid; place-items:center; height:536px; min-width:0; perspective:1100px; }
+    .art-backdrop { position:absolute; width:94%; height:93%; max-width:485px; border-radius:48% 48% 45% 45%; background:linear-gradient(145deg,#e2f1ff 3%,#d9ebfc 72%,#e8f3ff); transform:rotate(7deg); overflow:hidden; }
+    .art-backdrop::after { content:""; position:absolute; inset:0; opacity:.36; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' opacity='.35' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+    .orbit-art { position:absolute; inset:0; width:100%; height:100%; overflow:visible; color:#a2c3e6; pointer-events:none; }
+    .orbit-dash { transform-origin:250px 260px; animation:orbit-turn 70s linear infinite; }
+    .art-kana { position:absolute; color:#91b9e5; font-weight:800; user-select:none; pointer-events:none; }
+    .art-kana.a { font-size:112px; left:9%; top:6%; transform:rotate(-12deg); opacity:.26; }
+    .art-kana.i { font-size:68px; right:7%; bottom:14%; transform:rotate(12deg); opacity:.32; }
+    .art-caption { position:absolute; left:28px; bottom:8px; font-size:9px; letter-spacing:.2em; color:#6a91b8; text-transform:uppercase; writing-mode:vertical-rl; }
+    .study-float { position:relative; z-index:2; width:min(331px,78%); animation:gentle-float 9s ease-in-out infinite; }
+    .study-card { padding:26px 27px 24px; border:1px solid #e1ecf8; border-radius:26px; background:#fffffff7; box-shadow:0 24px 60px #2766ac1c,0 5px 14px #2766ac0d; transform:rotate(-4deg); transform-style:preserve-3d; transition:transform .65s var(--ease); }
+    .card-header { display:flex; justify-content:space-between; align-items:center; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:#7692ad; }
+    .card-header span:last-child { display:grid; place-items:center; width:23px; height:23px; border:1px solid #dce8f7; border-radius:50%; font-size:13px; }
+    .phrase-box { min-height:159px; display:flex; flex-direction:column; justify-content:center; padding-top:10px; }
+    .jp-phrase { font-size:clamp(29px,3vw,42px); font-weight:800; line-height:1.45; color:var(--blue); letter-spacing:-.07em; white-space:nowrap; }
+    .pronunciation { color:#6884a0; font-size:16px; margin-top:6px; }
+    .translation { border-top:1px solid #dce8f7; padding-top:19px; font-size:13px; font-weight:650; }
+    .card-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:22px; }
+    .phrase-dots { display:flex; gap:5px; }
+    .phrase-dot { width:5px; height:5px; border-radius:50%; background:#d2e4f6; transition:background .3s,width .3s; }
+    .phrase-dot.active { width:15px; border-radius:4px; background:var(--blue); }
+    .phrase-next { display:flex; gap:6px; align-items:center; border:0; background:transparent; font-size:10px; padding:8px 0 8px 8px; color:#4a75a2; }
+    .phrase-next .arrow { width:14px; height:14px; transition:transform .3s var(--ease); }
+    .phrase-next:hover .arrow { transform:translateX(3px); }
+    .mini-tag { position:absolute; z-index:4; display:flex; align-items:center; gap:9px; border:1px solid #e8f1fb; border-radius:16px; background:#fff; padding:12px 19px; box-shadow:0 10px 30px #2766ac14; font-size:11px; font-weight:650; }
+    .tag-welcome { right:2%; top:12%; transform:rotate(9deg); animation:tag-float 8s ease-in-out infinite; }
+    .tag-welcome span { color:var(--blue); font-size:14px; }
+    .tag-talk { left:3%; bottom:18%; background:#fff8e8; border-color:#f7e3ba; transform:rotate(-8deg); animation:tag-float 10s -3s ease-in-out infinite; }
+    .tag-talk .status-dot { width:6px; height:6px; background:#6db68b; }
+    .star { position:absolute; width:29px; height:29px; color:#e6a34c; top:42%; right:0; animation:star-turn 18s ease-in-out infinite; }
+    .hero-bottom { display:flex; align-items:center; justify-content:space-between; padding:20px 0 23px; border-top:1px solid var(--line); font-size:9px; color:#68809a; }
+    .hero-bottom-left { display:flex; align-items:center; gap:20px; letter-spacing:.12em; text-transform:uppercase; }
+    .replay { border:0; background:transparent; color:#537ca7; padding:6px 0; font-size:10px; display:none; align-items:center; gap:6px; }
+    .motion-ready .replay { display:inline-flex; }
+    .replay svg { width:12px; height:12px; }
+    .scroll-link { display:flex; align-items:center; gap:18px; text-transform:uppercase; letter-spacing:.12em; }
+    .scroll-link svg { width:17px; height:17px; transition:transform .4s var(--ease); }
+    .scroll-link:hover svg { transform:translateY(3px); }
+    .section { padding:105px 0; }
+    .section-label { display:flex; align-items:center; gap:12px; margin-bottom:24px; font-size:11px; font-weight:750; letter-spacing:.1em; text-transform:uppercase; color:#4779ab; }
+    .section-label .number { width:25px; height:25px; border-radius:50%; border:1px solid #bbd6f1; display:grid; place-items:center; font-size:9px; letter-spacing:0; }
+    h2 { font-weight:700; font-size:clamp(36px,3.6vw,50px); line-height:1.21; letter-spacing:-.045em; }
+    .about-grid { display:grid; grid-template-columns:.85fr 1.15fr; align-items:center; gap:105px; }
+    .tutor-art { position:relative; min-height:388px; background:linear-gradient(145deg,#dcecff,#f1f7ff); border:1px solid #d9e9fa; border-radius:30px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .tutor-orbit { position:absolute; width:300px; height:300px; border:1px dashed #b7d1ef; border-radius:50%; }
+    .tutor-orbit::before { content:""; position:absolute; inset:25px; border:1px solid #c7ddf6; border-radius:50%; }
+    .tutor-monogram { position:relative; display:grid; place-items:center; width:148px; height:148px; border-radius:50%; background:#bed9f5; color:#265d9b; box-shadow:0 12px 35px #4885bc22; font-size:80px; font-weight:800; line-height:1; }
+    .tutor-seal { position:absolute; right:41px; top:42px; width:49px; height:49px; border-radius:16px; background:#7a75cf; color:#fff; display:grid; place-items:center; font-size:24px; transform:rotate(8deg); }
+    .tutor-caption { position:absolute; left:28px; bottom:28px; font-size:10px; display:flex; flex-direction:column; gap:3px; }
+    .tutor-caption strong { font-weight:750; font-size:14px; }
+    .tutor-caption span { letter-spacing:.09em; text-transform:uppercase; color:#6687a7; font-size:9px; }
+    .tutor-hello { position:absolute; left:29px; top:28px; font-size:11px; color:#527da9; letter-spacing:.08em; }
+    .about-copy h2 { margin-bottom:23px; }
+    .about-copy .intro-lead { color:var(--ink); font-size:18px; line-height:1.7; max-width:490px; margin-bottom:18px; }
+    .about-copy .body-copy { font-size:15px; color:var(--muted); line-height:1.85; max-width:460px; }
+    .profile-note { margin-top:23px; border-top:1px solid var(--line); padding-top:17px; font-size:12px; color:#597797; }
+    .profile-note summary { cursor:pointer; list-style:none; display:flex; gap:12px; align-items:center; }
+    .profile-note summary::after { content:"+"; margin-left:auto; font-size:15px; }
+    .profile-note[open] summary::after { content:"−"; }
+    .profile-note p { font-size:12px; margin-top:10px; max-width:460px; line-height:1.8; }
+    .lessons { background:#edf5ff; border-block:1px solid #e3eefb; }
+    .section-heading-row { display:flex; gap:40px; justify-content:space-between; align-items:flex-end; margin-bottom:42px; }
+    .section-heading-row h2 { max-width:530px; }
+    .section-heading-row>p { color:var(--muted); font-size:15px; max-width:310px; line-height:1.85; padding-bottom:4px; }
+    .lesson-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .lesson-card { position:relative; background:#fff; padding:32px 35px 30px; border:1px solid #dce8f7; border-radius:24px; overflow:hidden; box-shadow:0 12px 35px #1847770b; transition:transform .55s var(--ease),box-shadow .55s var(--ease),border-color .3s; }
+    .lesson-card:hover { transform:translateY(-5px); border-color:#bbd7f3; box-shadow:0 20px 40px #2766ac16; }
+    .lesson-card.dark { background:linear-gradient(145deg,#f7f5ff,#edf3ff); border-color:#dcdff5; color:var(--ink); }
+    .lesson-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:38px; }
+    .lesson-icon { width:59px; height:59px; display:grid; place-items:center; border:1px solid #dce8f7; border-radius:17px; background:#eaf3fe; font-size:29px; font-weight:800; color:var(--blue); }
+    .dark .lesson-icon { color:#705dba; background:#ede9ff; border-color:#dcd6fa; }
+    .lesson-index { color:#7590a9; font-size:9px; letter-spacing:.12em; }
+    .dark .lesson-index { color:#807da3; }
+    .lesson-jp { font-size:10px; font-weight:750; letter-spacing:.1em; color:var(--blue); margin-bottom:12px; text-transform:uppercase; }
+    .dark .lesson-jp { color:#705dba; }
+    h3 { font-size:27px; font-weight:700; letter-spacing:-.03em; line-height:1.25; margin-bottom:16px; }
+    .lesson-card>p:last-of-type { font-size:14px; color:var(--muted); max-width:405px; line-height:1.9; }
+    .dark>p:last-of-type { color:var(--muted); }
+    .lesson-card-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:31px; padding-top:22px; border-top:1px solid #e0eaf7; }
+    .dark .lesson-card-bottom { border-color:#dddff4; }
+    .lesson-topics { display:flex; gap:7px; flex-wrap:wrap; }
+    .lesson-topics span { padding:4px 10px; border:1px solid #dce8f7; border-radius:30px; font-size:10px; color:#5d7fa3; }
+    .dark .lesson-topics span { border-color:#dcdff5; color:#7569a9; }
+    .lesson-link { display:grid; place-items:center; width:36px; height:36px; flex:none; border:1px solid #c8ddf3; border-radius:50%; margin-left:12px; transition:background .3s,color .3s,transform .4s var(--ease); }
+    .lesson-link .arrow { width:16px; height:16px; }
+    .lesson-link:hover { background:var(--ink); color:#fff; transform:rotate(8deg); }
+    .dark .lesson-link { border-color:#d0d6ef; }
+    .dark .lesson-link:hover { background:#705dba; color:#fff; }
+    .lesson-footnote { display:flex; justify-content:center; align-items:center; gap:10px; font-size:11px; color:#6a86a0; margin-top:25px; }
+    .lesson-footnote svg { width:15px; height:15px; }
+    .booking { padding:83px 0; }
+    .booking-panel { position:relative; background:linear-gradient(135deg,#eaf5ff,#dceeff); border:1px solid #d6e9fb; border-radius:30px; text-align:center; padding:72px 26px 61px; overflow:hidden; isolation:isolate; }
+    .booking-orbit { position:absolute; z-index:-1; pointer-events:none; border:1px solid #c8dff6; border-radius:50%; width:600px; height:600px; left:calc(50% - 300px); top:-82px; }
+    .booking-orbit::before { content:""; position:absolute; inset:-58px; border:1px solid #d2e5f7; border-radius:50%; }
+    .booking-panel .eyebrow { justify-content:center; margin-bottom:24px; font-size:9px; }
+    .booking-panel h2 { font-size:clamp(35px,4.7vw,65px); max-width:740px; margin-inline:auto; }
+    .booking-panel>p:not(.eyebrow):not(.booking-note) { color:#536f8d; font-size:15px; max-width:440px; margin:24px auto 28px; }
+    .booking-note { color:#6883a0; font-size:11px; margin-top:14px; }
+    .booking-kana { position:absolute; left:6%; top:36%; font-size:69px; font-weight:800; color:#91b7df; transform:rotate(-13deg); opacity:.32; }
+    .booking-kana.right { right:7%; left:auto; top:51%; transform:rotate(13deg); font-size:58px; }
+    .footer { padding-bottom:28px; }
+    .footer-top { border-top:1px solid var(--line); padding-top:27px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .footer-brand { font-size:12px; font-weight:550; }
+    .footer-jp { color:#667d6d; font-size:10px; margin-top:4px; }
+    .footer-right { display:flex; align-items:center; gap:33px; font-size:10px; color:#68809a; }
+    .footer-right a { display:flex; align-items:center; gap:8px; }
+    .footer-right svg { width:13px; height:13px; }
+    .intro { display:none; position:fixed; inset:0; z-index:100; background:radial-gradient(circle at 28% 20%,#fff 0,#eff7ff 38%,#d9edff 100%); overflow:hidden; color:#164b8d; isolation:isolate; opacity:1; transition:opacity .75s var(--ease),visibility .75s; }
+    .intro[hidden] { display:none !important; }
+    .intro.running { display:grid; place-items:center; }
+    .intro.leaving { opacity:0; visibility:hidden; pointer-events:none; }
+    .intro::before,.intro::after { content:""; position:absolute; width:54vmax; height:54vmax; border-radius:50%; pointer-events:none; z-index:-1; }
+    .intro::before { top:-31vmax; right:-17vmax; background:#c4e5ff; opacity:.55; }
+    .intro::after { left:-27vmax; bottom:-33vmax; background:#d6e7ff; opacity:.75; }
+    .intro-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+    .intro-content { position:relative; z-index:2; text-align:center; padding:28px; width:min(1080px,96%); }
+    .intro-kicker { font-size:clamp(.78rem,2vw,.98rem); font-weight:750; letter-spacing:.21em; color:#416e9a; margin-bottom:16px; opacity:0; transform:translateY(12px); transition:opacity .65s .08s var(--ease),transform .85s .08s var(--ease); }
+    .intro-title { margin:0 auto 18px; font-size:clamp(2.9rem,8.3vw,6.8rem); line-height:1.03; letter-spacing:-.075em; font-weight:850; text-shadow:0 14px 42px #4a7dc11f; }
+    .intro-title .intro-line { display:block; overflow:hidden; padding-bottom:8px; }
+    .intro-title .intro-line > * { display:block; transform:translateY(112%); transition:transform 1.15s var(--ease); }
+    .intro-title .intro-line:nth-child(2) > * { background:linear-gradient(90deg,#2471b8 0%,#7b60c4 50%,#e06fa9 100%); color:transparent; background-clip:text; -webkit-background-clip:text; transition-delay:.12s; }
+    .intro.wordmark .intro-title .intro-line > * { transform:translateY(0); }
+    .intro.wordmark .intro-kicker { opacity:1; transform:none; }
+    .intro-subtitle { font-size:clamp(.91rem,2.4vw,1.15rem); color:#527493; letter-spacing:.015em; opacity:0; transform:translateY(10px); transition:opacity .7s .4s,transform .9s .4s var(--ease); }
+    .intro.wordmark .intro-subtitle { opacity:1; transform:none; }
+    .intro-skip { position:absolute; top:29px; right:32px; border:1px solid #bcd6f1; border-radius:40px; background:#fff; box-shadow:0 6px 22px #2766ac1a; padding:9px 17px; display:flex; align-items:center; gap:15px; font-size:11px; font-weight:700; z-index:3; transition:background .3s; }
+    .intro-skip:hover { background:#fff; }
+    .intro-skip svg { width:14px; height:14px; }
+    .intro-bottom { position:absolute; bottom:31px; left:32px; right:32px; display:flex; justify-content:space-between; font-size:9px; letter-spacing:.13em; color:#6b90b2; text-transform:uppercase; }
+    .intro-progress { position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,#2766ac,#ef637e,#ffb332); transform:scaleX(0); transform-origin:left; }
+    body.intro-active { overflow:hidden; }
+    .motion-ready .reveal:not(.revealed) { opacity:0; transform:translateY(28px); }
+    .motion-ready .reveal { transition:opacity .9s var(--ease),transform 1.1s var(--ease); transition-delay:var(--reveal-delay,0ms); }
+    .intro-preparing .hero-enter { opacity:0; transform:translateY(24px); }
+    .hero-enter { transition:opacity 1s var(--ease),transform 1.2s var(--ease); transition-delay:var(--enter-delay,0ms); }
+    .intro-preparing .hero-emphasis .underline path { stroke-dashoffset:430; }
+    .hero-emphasis .underline path { transition:stroke-dashoffset 1.4s .65s var(--ease); }
+    .intro-preparing .hero-art { opacity:0; transform:translateY(35px) rotate(3deg) scale(.94); }
+    .hero-art { transition:opacity 1s .15s var(--ease),transform 1.6s .15s var(--ease); }
+    .page-hidden *, .page-hidden *::before, .page-hidden *::after { animation-play-state:paused !important; }
+    @keyframes gentle-float { 0%,100% { transform:translateY(0) rotate(.4deg); } 50% { transform:translateY(-11px) rotate(-.8deg); } }
+    @keyframes tag-float { 0%,100% { translate:0 0; } 50% { translate:0 -9px; } }
+    @keyframes orbit-turn { to { transform:rotate(360deg); } }
+    @keyframes star-turn { 0%,100% { transform:rotate(-12deg) scale(1); } 50% { transform:rotate(30deg) scale(.85); } }
+    dialog { border:1px solid #dce8f7; border-radius:24px; padding:37px; width:min(430px,calc(100% - 36px)); color:var(--ink); background:var(--paper); box-shadow:0 25px 100px #17375d33; }
+    dialog::backdrop { background:#17375d80; }
+    .dialog-label { font-size:10px; letter-spacing:.13em; color:#6686a4; text-transform:uppercase; margin-bottom:15px; }
+    dialog h2 { font-size:31px; margin-bottom:14px; }
+    dialog p { font-size:13px; color:var(--muted); line-height:1.8; }
+    dialog .button { margin-top:25px; }
+    @media (min-width:1500px) { .hero-grid { min-height:750px; } }
+    @media (max-width:1100px) { .shell { width:calc(100% - 64px); } h1 { font-size:clamp(50px,6.1vw,70px); } .hero-grid { gap:0; min-height:630px; } .hero-art { height:480px; } .hero-lead { max-width:380px; font-size:14px; } .hero-actions { gap:15px; } .button { padding:15px 21px; gap:18px; } .about-grid { gap:65px; } .nav { gap:26px; } .tag-talk { left:0; } .tag-welcome { right:0; } }
+    @media (max-width:820px) { .shell { width:calc(100% - 48px); } .header-inner { min-height:78px; } .nav { gap:20px; } .hero-grid { grid-template-columns:1fr; padding-top:50px; padding-bottom:24px; gap:12px; } .hero-copy { max-width:590px; padding-bottom:0; } h1 { font-size:clamp(60px,9vw,79px); } .hero-lead { max-width:490px; } .hero-art { width:min(510px,100%); height:500px; justify-self:center; margin-top:14px; } .jp-phrase { font-size:40px; } .section { padding:76px 0; } .about-grid { gap:42px; grid-template-columns:.85fr 1.15fr; } .tutor-art { min-height:340px; } .tutor-orbit { width:240px; height:240px; } .tutor-monogram { font-size:150px; } .tutor-seal { top:32px; right:27px; } .about-copy .intro-lead { font-size:15px; } .section-heading-row { gap:25px; } .section-heading-row>p { max-width:250px; font-size:12px; } .lesson-card { padding:27px 25px; } h3 { font-size:24px; } .lesson-topics { gap:5px; } .lesson-topics span { padding:4px 7px; font-size:8px; } .booking { padding:65px 0; } .booking-kana { left:3%; } .booking-kana.right { right:3%; } }
+    @media (max-width:600px) { html { scroll-padding-top:87px; } .shell { width:calc(100% - 40px); } .header-inner { min-height:76px; gap:12px; } .brand { gap:8px; } .brand-symbol { width:34px; height:34px; font-size:21px; } .brand-text { font-size:13px; } .brand-text small { font-size:7px; letter-spacing:.16em; margin-top:4px; } .nav { gap:13px; font-size:11px; } .nav-link { display:none; } .nav-book { padding:9px 13px; gap:8px; font-size:10px; } .nav-book .arrow { width:14px; height:14px; } .hero-grid { padding-top:34px; gap:7px; } .hero .eyebrow { margin-bottom:24px; font-size:8px; letter-spacing:.12em; gap:7px; } h1 { font-size:clamp(42px,11.8vw,67px); } .hero-emphasis { padding-bottom:12px; } .hero-lead { margin-top:18px; font-size:13px; line-height:1.85; } .hero-actions { margin-top:24px; gap:15px; } .button { font-size:11px; padding:15px 19px; gap:17px; } .text-link { font-size:11px; } .hero-note { margin-top:18px; font-size:9px; gap:6px; } .hero-art { height:402px; max-width:400px; margin-top:20px; } .art-backdrop { width:90%; height:95%; } .study-float { width:76%; max-width:292px; } .study-card { padding:22px 22px 20px; } .card-header { font-size:7px; } .phrase-box { min-height:136px; } .jp-phrase { font-size:clamp(25px,8vw,36px); } .pronunciation { font-size:16px; } .translation { padding-top:15px; font-size:11px; } .card-bottom { margin-top:13px; } .tag-welcome { top:7%; right:0; } .mini-tag { padding:10px 14px; font-size:10px; } .tag-talk { bottom:11%; left:0; } .art-kana.a { font-size:88px; top:2%; } .art-kana.i { font-size:60px; right:6%; bottom:8%; } .star { top:41%; right:0; width:22px; } .art-caption { display:none; } .hero-bottom { padding:17px 0; gap:15px; } .hero-bottom-left { gap:11px; font-size:7px; letter-spacing:.08em; } .replay { font-size:8px; } .scroll-link { gap:9px; font-size:7px; letter-spacing:.08em; } .section { padding:62px 0; } .about-grid { grid-template-columns:1fr; gap:33px; } .tutor-art { min-height:330px; max-width:100%; border-radius:7px 7px 100px 7px; } .tutor-orbit { width:255px; height:255px; } .tutor-monogram { font-size:169px; } .tutor-seal { top:32px; right:37px; } .section-label { font-size:9px; margin-bottom:20px; } h2 { font-size:38px; } .about-copy h2 { margin-bottom:20px; } .about-copy .intro-lead { font-size:16px; } .about-copy .body-copy { font-size:12px; } .section-heading-row { display:block; margin-bottom:28px; } .section-heading-row>p { max-width:360px; margin-top:19px; font-size:12px; } .lesson-grid { grid-template-columns:1fr; gap:17px; } .lesson-card { padding:27px 27px 25px; } .lesson-card-top { margin-bottom:30px; } h3 { font-size:26px; } .lesson-topics span { font-size:9px; padding:4px 9px; } .lesson-footnote { font-size:9px; margin-top:21px; } .booking { padding:54px 0; } .booking-panel { padding:51px 24px 46px; } .booking-panel h2 { font-size:38px; } .booking-panel .eyebrow { font-size:8px; letter-spacing:.1em; gap:7px; } .booking-panel>p:not(.eyebrow):not(.booking-note) { font-size:12px; margin:20px auto 25px; } .booking-kana { font-size:42px; top:19%; left:-9px; } .booking-kana.right { right:-7px; top:69%; font-size:39px; } .booking-orbit { width:440px; height:440px; left:calc(50% - 220px); top:-10px; } .footer-top { align-items:flex-start; } .footer-right { flex-direction:column-reverse; align-items:flex-end; gap:17px; font-size:8px; } .footer-brand { font-size:11px; } .footer-jp { font-size:8px; } .intro-mark { width:80px; height:80px; font-size:40px; margin-bottom:26px; } .intro-title { font-size:clamp(32px,9.6vw,57px); } .intro-content { padding:20px 13px; } .intro-subtitle { font-size:9px; } .intro-skip { top:20px; right:20px; padding:8px 13px; } .intro-bottom { left:20px; right:20px; bottom:24px; font-size:7px; letter-spacing:.1em; } }
+    @media (max-width:820px) { .tutor-monogram { width:130px; height:130px; font-size:72px; } }
+    @media (max-width:600px) { .intro-title { font-size:clamp(2.35rem,11.4vw,4.4rem); } .intro-kicker { letter-spacing:.13em; } .intro-subtitle { font-size:.91rem; } }
+    @media (max-width:600px) { .tutor-art { border-radius:26px; } .tutor-monogram { width:140px; height:140px; font-size:76px; } .hero .eyebrow { font-size:10px; } .hero-lead { font-size:15px; } .hero-note { font-size:10px; } .button { font-size:12px; } .card-header { font-size:8px; } .section-label { font-size:10px; } .about-copy .body-copy { font-size:14px; } .section-heading-row>p { font-size:13px; } .booking-panel>p:not(.eyebrow):not(.booking-note) { font-size:13px; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none !important; transition:none !important; } .intro { display:none !important; } .replay { display:none !important; } .motion-ready .reveal:not(.revealed),.intro-preparing .hero-enter,.intro-preparing .hero-art { opacity:1; transform:none; } .hero-emphasis .underline path { stroke-dashoffset:0 !important; } }
   </style>
 </head>
 <body>
-  <!-- First-visit opening: animated hiragana gather into the title. -->
-  <div class="intro-overlay" id="introOverlay" aria-label="Welcome to Ted Japanese Lesson">
-    <div class="intro-kana-field" id="introKanaField" aria-hidden="true"></div>
-    <div class="intro-title-group" aria-hidden="true">
+  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Welcome to Ted Japanese Lesson" hidden>
+    <canvas class="intro-canvas" id="introCanvas" aria-hidden="true"></canvas>
+    <div class="intro-content" aria-hidden="true">
       <p class="intro-kicker" lang="ja">ようこそ！</p>
-      <p class="intro-final-title">Ted<br><strong>Japanese Lesson</strong></p>
+      <p class="intro-title"><span class="intro-line"><span>Ted</span></span><span class="intro-line"><strong>Japanese Lesson</strong></span></p>
       <p class="intro-subtitle">Your Japanese journey starts here.</p>
     </div>
-    <button type="button" class="intro-skip" id="introSkip">Skip intro →</button>
+    <button class="intro-skip" id="introSkip" type="button">Skip intro <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
+    <div class="intro-bottom" aria-hidden="true"><span>Online Japanese lessons</span><span lang="ja">ことばで、つながる。</span></div>
+    <div class="intro-progress" id="introProgress" aria-hidden="true"></div>
   </div>
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Ted Japanese Lesson, home">
-        <span class="brand-mark" aria-hidden="true">あ</span>
-        <span>Ted Japanese Lesson</span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#lessons">Lessons</a>
-        <a class="nav-cta" href="#booking">Book a Lesson</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">Online Japanese lessons · 日本語レッスン</p>
-          <h1 id="hero-title">Learn Japanese.<br><span>Feel at home.</span></h1>
-          <p class="lead">Start speaking Japanese with more confidence. Whether you're learning your first words or looking for real conversation practice, there's a place for you here.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#booking">Book a Trial Lesson <span aria-hidden="true">→</span></a>
-            <a class="button button-secondary" href="#lessons">Explore Lessons</a>
+  <div id="site">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header" id="header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="Ted Japanese Lesson, home"><span class="brand-symbol" lang="ja" aria-hidden="true">あ</span><span class="brand-text">Ted<small>Japanese Lesson</small></span></a>
+        <nav class="nav" aria-label="Main navigation">
+          <a class="nav-link" href="#about">Meet Ted</a><a class="nav-link" href="#lessons">The lessons</a>
+          <a class="nav-book" href="#booking">Book a lesson <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow hero-enter" style="--enter-delay:50ms"><span class="status-dot" aria-hidden="true"></span>Online Japanese lessons <span lang="ja">· 日本語レッスン</span></p>
+            <h1 id="hero-title"><span class="title-line hero-enter" style="--enter-delay:120ms">Learn Japanese.</span><span class="title-line hero-enter" style="--enter-delay:220ms"><span class="serif hero-emphasis">Feel at home.<svg class="underline" viewBox="0 0 430 15" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10C104 1 289 1 428 9" stroke="#8fbce9" stroke-width="2.5" stroke-linecap="round"/></svg></span></span></h1>
+            <p class="hero-lead hero-enter" style="--enter-delay:320ms">Start speaking Japanese with more confidence. Whether you're learning your first words or looking for real conversation practice, there's a place for you here.</p>
+            <div class="hero-actions hero-enter" style="--enter-delay:420ms">
+              <a class="button button-primary" href="#booking">Book a Trial Lesson <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+              <a class="text-link" href="#lessons">Explore the lessons</a>
+            </div>
+            <p class="hero-note hero-enter" style="--enter-delay:520ms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>Relaxed, one-on-one lessons. Wherever you are.</p>
           </div>
-          <p class="hero-note">Relaxed, one-on-one lessons from wherever you are. <button class="intro-replay" id="introReplay" type="button">↻ Replay intro</button></p>
-        </div>
-        <div class="art" aria-hidden="true">
-          <div class="art-circle"></div>
-          <div class="language-card">
-            <span class="card-top">A little Japanese for today</span>
-            <span class="jp-big" lang="ja">こんにちは！</span>
-            <div class="pronunciation">Konnichiwa</div>
-            <hr class="card-rule">
-            <p class="translation">Hello! Nice to meet you.</p>
+          <div class="hero-art" id="heroArt">
+            <div class="art-backdrop" aria-hidden="true"></div>
+              <svg class="orbit-art" viewBox="0 0 500 536" fill="none" aria-hidden="true"><ellipse cx="250" cy="260" rx="214" ry="192" transform="rotate(-23 250 260)" stroke="currentColor" stroke-width=".7"/><ellipse class="orbit-dash" cx="250" cy="260" rx="221" ry="213" stroke="currentColor" stroke-width=".7" stroke-dasharray="1 14"/><path d="M74 400c69 79 258 122 370-7" stroke="currentColor" stroke-width=".7"/></svg>
+            <span class="art-kana a" lang="ja" aria-hidden="true">あ</span><span class="art-kana i" lang="ja" aria-hidden="true">い</span><span class="art-caption" aria-hidden="true">Little words. New possibilities.</span>
+            <div class="study-float"><div class="study-card" id="studyCard">
+              <div class="card-header"><span>A little Japanese for today</span><span lang="ja" aria-hidden="true">日</span></div>
+              <div id="phraseContent" aria-live="polite" aria-atomic="true"><div class="phrase-box"><p class="jp-phrase" id="jpPhrase" lang="ja">こんにちは！</p><p class="pronunciation" id="pronunciation">Konnichiwa</p></div><p class="translation" id="translation">Hello! Nice to meet you.</p></div>
+              <div class="card-bottom"><div class="phrase-dots" aria-hidden="true"><span class="phrase-dot active"></span><span class="phrase-dot"></span><span class="phrase-dot"></span></div><button class="phrase-next" id="phraseNext" type="button">Another phrase <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></div>
+            </div></div>
+            <div class="mini-tag tag-welcome" aria-hidden="true"><span lang="ja">ようこそ</span>Welcome!</div>
+            <div class="mini-tag tag-talk" aria-hidden="true"><span class="status-dot"></span>Let's talk.</div>
+            <svg class="star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0c0 14-6 20-20 20 14 0 20 6 20 20 0-14 6-20 20-20C26 20 20 14 20 0Z" fill="currentColor"/></svg>
           </div>
-          <span class="floating floating-one" lang="ja">ようこそ</span>
-          <span class="floating floating-two">Let's talk!</span>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="container about-layout">
-        <div class="portrait-placeholder" aria-label="Placeholder for a future tutor photo">
-          <div class="avatar" aria-hidden="true">T</div>
-          <p>Optional tutor photo<br>or illustration goes here</p>
+        <div class="shell hero-bottom"><div class="hero-bottom-left"><span>Your next chapter starts here</span><button class="replay" type="button" id="introReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 1 1 .5 7M4 3v7h7"/></svg>Replay intro</button></div><a class="scroll-link" href="#about">A little about Ted <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a></div>
+      </section>
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="shell about-grid">
+          <div class="tutor-art reveal" aria-label="Ted's decorative monogram"><div class="tutor-orbit" aria-hidden="true"></div><span class="tutor-hello" lang="ja">はじめまして。</span><span class="tutor-monogram" aria-hidden="true">T</span><span class="tutor-seal" lang="ja" aria-hidden="true">話</span><div class="tutor-caption"><strong>Ted</strong><span>Your Japanese conversation partner</span></div></div>
+          <div class="about-copy reveal" style="--reveal-delay:100ms"><p class="section-label"><span class="number" aria-hidden="true">01</span>Meet your tutor <span lang="ja">· はじめまして</span></p><h2 id="about-title">Hi, I'm <span class="serif">Ted!</span></h2><p class="intro-lead">I'm here to help you enjoy learning Japanese, one conversation at a time.</p><p class="body-copy">Learning a language takes practice, curiosity, and a little courage. In our lessons, we can focus on useful Japanese and the topics you want to talk about.</p><details class="profile-note"><summary>More about Ted</summary><p>Personal introduction, interests, and teaching approach will be added here.</p></details></div>
         </div>
-        <div class="intro-text">
-          <p class="eyebrow">Meet your tutor · はじめまして</p>
-          <div class="section-heading">
-            <h2 id="about-title">Hi, I'm Ted!</h2>
-            <p>I'm here to help you enjoy learning Japanese, one conversation at a time.</p>
+      </section>
+      <section class="section lessons" id="lessons" aria-labelledby="lessons-title">
+        <div class="shell">
+          <div class="section-heading-row reveal"><div><p class="section-label"><span class="number" aria-hidden="true">02</span>Find your starting point <span lang="ja">· レッスン</span></p><h2 id="lessons-title">Lessons made<br><span class="serif">for you.</span></h2></div><p>Choose what you'd like to practice. We can adjust the topics and pace to your learning goals.</p></div>
+          <div class="lesson-grid">
+            <article class="lesson-card reveal"><div class="lesson-card-top"><span class="lesson-icon" lang="ja" aria-hidden="true">あ</span><span class="lesson-index" aria-hidden="true">LESSON / 01</span></div><p class="lesson-jp"><span lang="ja">初心者向け</span> · For beginners</p><h3>Start with the basics</h3><p>New to Japanese? Build a foundation with everyday words, simple sentences, useful expressions, and speaking practice at a comfortable pace.</p><div class="lesson-card-bottom"><div class="lesson-topics"><span>Everyday words</span><span>Useful expressions</span></div><a class="lesson-link" href="#booking" aria-label="Start with the basics — book a trial lesson"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></article>
+            <article class="lesson-card dark reveal" style="--reveal-delay:100ms"><div class="lesson-card-top"><span class="lesson-icon" lang="ja" aria-hidden="true">話</span><span class="lesson-index" aria-hidden="true">LESSON / 02</span></div><p class="lesson-jp"><span lang="ja">会話練習</span> · Conversation</p><h3>Let's have a conversation</h3><p>Practice speaking about everyday life, travel, hobbies, or anything that interests you. Focus on communicating naturally and with confidence.</p><div class="lesson-card-bottom"><div class="lesson-topics"><span>Everyday life</span><span>Your interests</span></div><a class="lesson-link" href="#booking" aria-label="Conversation practice — book a trial lesson"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></article>
           </div>
-          <p>Learning a language takes practice, curiosity, and a little courage. In our lessons, we can focus on useful Japanese and the topics you want to talk about.</p>
-          <div class="placeholder-note"><strong>Profile to complete:</strong> Add your personal introduction, interests, and teaching approach here. No credentials or experience claims have been added.</div>
+          <p class="lesson-footnote reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8H4l2-4a8 8 0 1 1 14-4Z"/><path d="M8 9h8M8 13h5"/></svg>Your goals. Your pace. A conversation at a time.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="section lessons" id="lessons" aria-labelledby="lessons-title">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Find your starting point · レッスン</p>
-          <h2 id="lessons-title">Lessons made for you.</h2>
-          <p>Choose what you'd like to practice. We can adjust the topics and pace to your learning goals.</p>
-        </div>
-        <div class="lesson-grid">
-          <article class="lesson-card">
-            <div class="lesson-icon" aria-hidden="true">あ</div>
-            <p class="lesson-jp" lang="ja">初心者向け · For beginners</p>
-            <h3>Start with the basics</h3>
-            <p>New to Japanese? Build a foundation with everyday words, simple sentences, useful expressions, and speaking practice at a comfortable pace.</p>
-          </article>
-          <article class="lesson-card">
-            <div class="lesson-icon" aria-hidden="true">話</div>
-            <p class="lesson-jp" lang="ja">会話練習 · Conversation</p>
-            <h3>Let's have a conversation</h3>
-            <p>Practice speaking about everyday life, travel, hobbies, or anything that interests you. Focus on communicating naturally and with confidence.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="booking" aria-labelledby="booking-title">
-      <div class="container">
-        <div class="booking-wrap">
-          <p class="eyebrow">Ready to begin? · いっしょに学ぼう</p>
-          <h2 id="booking-title">Your Japanese journey starts here.</h2>
-          <p>Let's get to know your goals and decide what you'd like to learn in a trial lesson.</p>
-          <!-- IMPORTANT: Replace the placeholder URL below with your actual trial lesson booking link before publishing publicly. -->
-          <a class="button" href="https://example.com/REPLACE_WITH_YOUR_BOOKING_URL" target="_blank" rel="noopener noreferrer">Book a Trial Lesson <span aria-hidden="true">↗</span></a>
-          <p class="booking-placeholder"><strong>Setup required:</strong> This booking button is a placeholder. Replace its link with your actual reservation page before sharing the website.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© Ted Japanese Lesson · <span lang="ja">いっしょに日本語を楽しもう！</span></p>
-      <a href="#top">Back to top ↑</a>
-    </div>
-  </footer>
-
+      </section>
+      <section class="booking" id="booking" aria-labelledby="booking-title">
+        <div class="shell"><div class="booking-panel reveal"><div class="booking-orbit" aria-hidden="true"></div><span class="booking-kana" lang="ja" aria-hidden="true">は</span><span class="booking-kana right" lang="ja" aria-hidden="true">い</span><p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Ready to begin? <span lang="ja">· いっしょに学ぼう</span></p><h2 id="booking-title">Your Japanese journey<br><span class="serif">starts here.</span></h2><p>Let's get to know your goals and decide what you'd like to learn in a trial lesson.</p>
+          <!-- Set data-booking-url to the actual reservation URL to enable booking. -->
+          <a class="button button-primary" id="bookingLink" href="#booking" data-booking-url="https://example.com/REPLACE_WITH_YOUR_BOOKING_URL">Book a Trial Lesson <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><p class="booking-note" id="bookingNote">Trial booking will be available soon.</p></div></div>
+      </section>
+    </main>
+    <footer class="footer"><div class="shell footer-top"><div><p class="footer-brand">Ted Japanese Lesson</p><p class="footer-jp" lang="ja">いっしょに日本語を楽しもう！</p></div><div class="footer-right"><p>© Ted Japanese Lesson</p><a href="#top">Back to top <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20V5m-6 6 6-6 6 6"/></svg></a></div></div></footer>
+  </div>
+  <dialog id="bookingDialog" aria-labelledby="booking-dialog-title"><p class="dialog-label">Ted Japanese Lesson</p><h2 id="booking-dialog-title">Let's talk <span class="serif">soon.</span></h2><p>The trial lesson booking page is being prepared. Please check back once reservations open.</p><form method="dialog"><button class="button button-primary">Back to the website <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></form></dialog>
   <script>
-    // Minimal vanilla JavaScript; no external libraries, video, or assets.
-    document.documentElement.classList.add('js-enabled');
     (() => {
       'use strict';
-      const overlay = document.getElementById('introOverlay');
-      const field = document.getElementById('introKanaField');
-      const skipButton = document.getElementById('introSkip');
-      const replayButton = document.getElementById('introReplay');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const kana = Array.from('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん');
-      const colors = ['#e66d93','#f4a044','#7a6acf','#338cc7','#37aa9b','#d76cac','#5a96e4','#e0b43e'];
-      let timers = [];
+      const root = document.documentElement;
+      const motion = matchMedia('(prefers-reduced-motion: reduce)');
+      const site = document.getElementById('site');
+      const intro = document.getElementById('intro');
+      const canvas = document.getElementById('introCanvas');
+      const ctx = canvas.getContext('2d');
+      const skip = document.getElementById('introSkip');
+      const replay = document.getElementById('introReplay');
+      const progress = document.getElementById('introProgress');
+      const introDuration = 5100;
       let running = false;
-      const addTimer = (callback, delay) => { timers.push(window.setTimeout(callback, delay)); };
-      const clearTimers = () => { timers.forEach(window.clearTimeout); timers = []; };
-      const hide = () => {
-        clearTimers(); running = false;
-        overlay.classList.add('is-hidden');
+      let frame = 0;
+      let cleanupTimer = 0;
+      let finishTimer = 0;
+      let startTime = 0;
+      let pausedAt = 0;
+      let lastDraw = 0;
+      let returnFocus = null;
+      let replaying = false;
+      let width = 0;
+      let height = 0;
+      let particles = [];
+      const introFont = getComputedStyle(document.body).fontFamily;
+      const clamp = (v, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, v));
+      const smoothstep = t => t * t * (3 - 2 * t);
+      const random = (min, max) => min + Math.random() * (max - min);
+      const fallEase = t => {
+        // Match the playful easing of the supplied index.html without a repeating sway.
+        let u = clamp(t);
+        for (let i = 0; i < 4; i++) {
+          const x = 3 * .15 * u * (1 - u) ** 2 + 3 * .7 * u * u * (1 - u) + u ** 3;
+          const slope = 3 * .15 * (1 - u) ** 2 + 6 * (.7 - .15) * u * (1 - u) + 3 * (1 - .7) * u * u;
+          u = clamp(u - (x - t) / slope);
+        }
+        return 3 * .12 * u * (1 - u) ** 2 + 3 * .92 * u * u * (1 - u) + u ** 3;
+      };
+      const resizeCanvas = () => {
+        width = innerWidth; height = innerHeight;
+        const ratio = Math.min(devicePixelRatio || 1, 1.5);
+        canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+        ctx?.setTransform(ratio, 0, 0, ratio, 0, 0);
+      };
+      const makeGlyphSprite = p => {
+        const fontSize = p.size * 1.13;
+        const side = Math.ceil(fontSize * 1.7 + 12);
+        const ratio = Math.min(devicePixelRatio || 1, 1.5);
+        const sprite = document.createElement('canvas');
+        sprite.width = Math.round(side * ratio); sprite.height = Math.round(side * ratio);
+        const ink = sprite.getContext('2d');
+        ink.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ink.font = `900 ${fontSize}px ${introFont}`;
+        ink.textAlign = 'center'; ink.textBaseline = 'middle'; ink.lineJoin = 'round';
+        ink.strokeStyle = p.color.edge; ink.lineWidth = Math.max(.8, fontSize * .018);
+        ink.strokeText(p.letter, side / 2, side / 2);
+        ink.fillStyle = p.color.fill;
+        ink.fillText(p.letter, side / 2, side / 2);
+        return { canvas:sprite, side, fontSize };
+      };
+      const createParticles = () => {
+        const letters = Array.from('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん');
+        // Give every drop its own glyph, position, size, timing, and path.
+        const colors = [
+          { fill:'#e66d93', edge:'#bc4b73' }, { fill:'#f4a044', edge:'#ca792b' },
+          { fill:'#7a6acf', edge:'#5949aa' }, { fill:'#338cc7', edge:'#236c9f' },
+          { fill:'#37aa9b', edge:'#227f73' }, { fill:'#d76cac', edge:'#a54a82' },
+          { fill:'#5a96e4', edge:'#3472bd' }, { fill:'#e0b43e', edge:'#ae8822' }
+        ];
+        const narrow = width < 600;
+        particles = Array.from({ length:narrow ? 38 : 62 }, () => ({
+          letter:letters[Math.floor(random(0, letters.length))],
+          column:random(.04, .96),
+          size:random(narrow ? 23 : 26, narrow ? 63 : 95),
+          delay:random(0, 1000),
+          duration:random(3200, 4700),
+          drift:random(-65, 65),
+          startRotate:random(-.34, .34),
+          endRotate:random(-.48, .48),
+          color:colors[Math.floor(random(0, colors.length))]
+        }));
+        for (const p of particles) {
+          p.sprite = makeGlyphSprite(p);
+          p.atGather = fallPosition(p, 2300);
+        }
+      };
+      const fallPosition = (p, elapsed) => {
+        const progress = fallEase(clamp((elapsed - p.delay) / p.duration));
+        return {
+          x:p.size / 2 + p.column * Math.max(0, width - p.size) + p.drift * progress,
+          y:-height * .18 + progress * height * 1.33,
+          size:p.size * (.7 + progress * .43),
+          rotation:p.startRotate + (p.endRotate - p.startRotate) * progress
+        };
+      };
+      // The varied drops converge briefly before the original-style title appears.
+      const draw = now => {
+        if (!running || document.hidden) return;
+        const elapsed = now - startTime;
+        if (now - lastDraw < 13 && elapsed < introDuration) { frame = requestAnimationFrame(draw); return; }
+        lastDraw = now;
+        ctx.clearRect(0, 0, width, height);
+        if (elapsed < 3080) {
+          const gathering = elapsed >= 2300;
+          const gather = gathering ? smoothstep(clamp((elapsed - 2300) / 780)) : 0;
+          const fadeOut = 1 - smoothstep(clamp((gather - .08) / .8));
+          for (const p of particles) {
+            if (elapsed < p.delay) continue;
+            const position = gathering ? p.atGather : fallPosition(p, elapsed);
+            const x = gathering ? position.x + (width / 2 - position.x) * gather : position.x;
+            const y = gathering ? position.y + (height / 2 - position.y) * gather : position.y;
+            const size = gathering ? position.size * (1 - .95 * gather) : position.size;
+            if (y < -size || y > height + size || x < -size || x > width + size) continue;
+            const rotation = gathering ? position.rotation + Math.PI * 1.7 * gather : position.rotation;
+            ctx.globalAlpha = smoothstep(clamp((elapsed - p.delay) / 180)) * fadeOut * .96;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.scale(size / p.sprite.fontSize, size / p.sprite.fontSize);
+            ctx.drawImage(p.sprite.canvas, -p.sprite.side / 2, -p.sprite.side / 2, p.sprite.side, p.sprite.side);
+            ctx.restore();
+          }
+        }
+        ctx.globalAlpha = 1;
+        if (elapsed > 2700) intro.classList.add('wordmark');
+        progress.style.transform = `scaleX(${clamp(elapsed / introDuration)})`;
+        if (elapsed >= introDuration) { finishIntro(); return; }
+        frame = requestAnimationFrame(draw);
+      };
+      const focusBack = () => {
+        if (returnFocus?.isConnected && replaying) returnFocus.focus({ preventScroll:true });
+        else document.getElementById('main').focus({ preventScroll:true });
+      };
+      function finishIntro(immediate = false) {
+        if (!running) return;
+        running = false; cancelAnimationFrame(frame); clearTimeout(finishTimer);
+        intro.classList.add('leaving');
+        root.classList.remove('intro-preparing');
         document.body.classList.remove('intro-active');
-        window.setTimeout(() => { if (!running) field.replaceChildren(); }, 800);
+        site.inert = false;
+        intro.inert = true;
+        focusBack();
+        const cleanup = () => { intro.hidden = true; intro.classList.remove('running','wordmark','leaving'); ctx?.clearRect(0,0,width,height); };
+        clearTimeout(cleanupTimer);
+        if (immediate || motion.matches) cleanup(); else cleanupTimer = setTimeout(cleanup, 800);
+      }
+      const startIntro = (isReplay = false) => {
+        if (motion.matches || !ctx || running) return;
+        clearTimeout(cleanupTimer); clearTimeout(finishTimer);
+        replaying = isReplay; returnFocus = document.activeElement;
+        intro.hidden = false; intro.inert = false;
+        intro.classList.remove('leaving','wordmark'); intro.classList.add('running');
+        root.classList.add('intro-preparing'); document.body.classList.add('intro-active');
+        site.inert = true; skip.focus({ preventScroll:true });
+        resizeCanvas(); createParticles(); lastDraw = 0;
+        running = true; pausedAt = 0; startTime = performance.now();
+        progress.style.transform = 'scaleX(0)';
+        frame = requestAnimationFrame(draw);
+        // Release the page even if rendering is interrupted by the browser.
+        finishTimer = setTimeout(() => finishIntro(), introDuration + 1000);
       };
-      const gatherKana = () => {
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        for (const span of field.children) {
-          const rect = span.getBoundingClientRect();
-          span.style.animation = 'none';
-          span.style.left = `${rect.left}px`;
-          span.style.top = `${rect.top}px`;
-          span.style.opacity = '1';
-          span.style.transform = 'none';
-          span.style.transition = 'transform 780ms cubic-bezier(.2,.8,.25,1), opacity 680ms ease';
-          // Forces the browser to store the current position before transitioning.
-          void span.offsetWidth;
-          span.style.transform = `translate3d(${centerX - rect.left - rect.width/2}px, ${centerY - rect.top - rect.height/2}px,0) scale(.05) rotate(310deg)`;
-          span.style.opacity = '0';
-        }
-      };
-      const startIntro = () => {
-        if (reducedMotion.matches) return;
-        clearTimers(); running = true;
-        field.replaceChildren();
-        overlay.classList.remove('is-hidden','title-visible');
-        document.body.classList.add('intro-active');
-        const narrow = window.innerWidth < 560;
-        const count = narrow ? 34 : 58;
-        const fragment = document.createDocumentFragment();
-        for (let i = 0; i < count; i++) {
-          const span = document.createElement('span');
-          span.className = 'intro-kana';
-          span.lang = 'ja';
-          span.textContent = kana[Math.floor(Math.random() * kana.length)];
-          const size = Math.round((narrow ? 23 : 26) + Math.random() * (narrow ? 40 : 69));
-          span.style.setProperty('--left', `${4 + Math.random() * 91}%`);
-          span.style.setProperty('--size', `${size}px`);
-          span.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
-          span.style.setProperty('--delay', `${(Math.random() * .75).toFixed(2)}s`);
-          span.style.setProperty('--duration', `${(3.2 + Math.random() * 1.5).toFixed(2)}s`);
-          span.style.setProperty('--drift', `${Math.round((Math.random() - .5) * 140)}px`);
-          span.style.setProperty('--start-rotate', `${Math.round(-45 + Math.random() * 90)}deg`);
-          span.style.setProperty('--end-rotate', `${Math.round(-90 + Math.random() * 180)}deg`);
-          fragment.appendChild(span);
-        }
-        field.appendChild(fragment);
-        addTimer(gatherKana, 2300);
-        addTimer(() => overlay.classList.add('title-visible'), 2700);
-        addTimer(hide, 5100);
-      };
-      skipButton.addEventListener('click', hide);
-      replayButton.addEventListener('click', () => { startIntro(); skipButton.focus(); });
-      reducedMotion.addEventListener?.('change', () => { if (reducedMotion.matches && running) hide(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape' && running) hide(); });
-      // Anchored links should open immediately without the splash screen.
-      if (!reducedMotion.matches && !window.location.hash) startIntro();
+      if (!motion.matches) root.classList.add('motion-ready');
+      skip.addEventListener('click', () => finishIntro());
+      replay.addEventListener('click', () => startIntro(true));
+      document.addEventListener('keydown', e => {
+        if (!running) return;
+        if (e.key === 'Escape') { e.preventDefault(); finishIntro(); }
+        // Skip is the only actionable element in the welcome dialog.
+        if (e.key === 'Tab') { e.preventDefault(); skip.focus({ preventScroll:true }); }
+      });
+      window.addEventListener('resize', () => {
+        if (!running) return;
+        resizeCanvas();
+        for (const p of particles) p.atGather = fallPosition(p, 2300);
+      }, { passive:true });
+      document.addEventListener('visibilitychange', () => {
+        root.classList.toggle('page-hidden', document.hidden);
+        if (!running) return;
+        if (document.hidden) { pausedAt = performance.now(); cancelAnimationFrame(frame); clearTimeout(finishTimer); }
+        else { startTime += performance.now() - pausedAt; pausedAt = 0; frame = requestAnimationFrame(draw); finishTimer = setTimeout(() => finishIntro(), Math.max(50,introDuration - (performance.now() - startTime)) + 1000); }
+      });
+      if (!motion.matches && !location.hash) startIntro();
+      // Progressive enhancement: content is visible if script or observer support is absent.
+      const reveals = [...document.querySelectorAll('.reveal')];
+      let observer;
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(entries => {
+          for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); }
+        }, { threshold:.1, rootMargin:'0px 0px -25px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      } else reveals.forEach(el => el.classList.add('revealed'));
+      motion.addEventListener('change', () => {
+        root.classList.toggle('motion-ready', !motion.matches);
+        if (motion.matches) { finishIntro(true); reveals.forEach(el => el.classList.add('revealed')); resetTilt(); }
+      });
+      const header = document.getElementById('header');
+      let scrollFrame = 0;
+      const syncHeader = () => { header.classList.toggle('scrolled', scrollY > 15); scrollFrame = 0; };
+      addEventListener('scroll', () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(syncHeader); }, { passive:true });
+      syncHeader();
+      if ('IntersectionObserver' in window) {
+        const links = [...document.querySelectorAll('.nav-link')];
+        const navObserver = new IntersectionObserver(entries => {
+          for (const entry of entries) if (entry.isIntersecting) { links.forEach(link => { if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); }); }
+        }, { rootMargin:'-20% 0px -55% 0px', threshold:0 });
+        document.querySelectorAll('main>section').forEach(el => navObserver.observe(el));
+      }
+      const phrases = [
+        { jp:'こんにちは！', roman:'Konnichiwa', translation:'Hello! Nice to meet you.' },
+        { jp:'ありがとう。', roman:'Arigatou', translation:'Thank you. Two little words, a lot of warmth.' },
+        { jp:'はじめまして。', roman:'Hajimemashite', translation:"Nice to meet you. Let's start a conversation." }
+      ];
+      const phraseContent = document.getElementById('phraseContent');
+      const phraseNext = document.getElementById('phraseNext');
+      let phraseIndex = 0;
+      let phraseBusy = false;
+      phraseNext.addEventListener('click', async () => {
+        if (phraseBusy) return;
+        phraseBusy = true;
+        try {
+          if (!motion.matches && phraseContent.animate) await phraseContent.animate([{ opacity:1,transform:'translateY(0)' },{ opacity:0,transform:'translateY(-8px)' }],{ duration:180,easing:'ease-in',fill:'forwards' }).finished;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          document.getElementById('jpPhrase').textContent = phrases[phraseIndex].jp;
+          document.getElementById('pronunciation').textContent = phrases[phraseIndex].roman;
+          document.getElementById('translation').textContent = phrases[phraseIndex].translation;
+          document.querySelectorAll('.phrase-dot').forEach((dot,i) => dot.classList.toggle('active',i === phraseIndex));
+          phraseContent.getAnimations().forEach(animation => animation.cancel());
+          if (!motion.matches && phraseContent.animate) await phraseContent.animate([{ opacity:0,transform:'translateY(9px)' },{ opacity:1,transform:'translateY(0)' }],{ duration:430,easing:'cubic-bezier(.22,1,.36,1)' }).finished;
+        } catch (_) { phraseContent.getAnimations?.().forEach(animation => animation.cancel()); }
+        finally { phraseBusy = false; }
+      });
+      const art = document.getElementById('heroArt');
+      const card = document.getElementById('studyCard');
+      const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+      let tiltFrame = 0;
+      let tiltBounds = null;
+      let pointerX = 0;
+      let pointerY = 0;
+      function resetTilt() { cancelAnimationFrame(tiltFrame); tiltFrame = 0; tiltBounds = null; card.style.transform = ''; }
+      art.addEventListener('pointerenter', () => { if (!motion.matches && finePointer.matches) tiltBounds = art.getBoundingClientRect(); });
+      art.addEventListener('pointermove', e => {
+        if (motion.matches || !finePointer.matches || !tiltBounds) return;
+        pointerX = clamp((e.clientX - tiltBounds.left) / tiltBounds.width - .5,-.5,.5);
+        pointerY = clamp((e.clientY - tiltBounds.top) / tiltBounds.height - .5,-.5,.5);
+        if (!tiltFrame) tiltFrame = requestAnimationFrame(() => { card.style.transform = `rotate(-4deg) rotateY(${pointerX * 9}deg) rotateX(${-pointerY * 7}deg)`; tiltFrame = 0; });
+      });
+      art.addEventListener('pointerleave', resetTilt);
+      window.addEventListener('resize', resetTilt, { passive:true });
+      const bookingLink = document.getElementById('bookingLink');
+      const bookingNote = document.getElementById('bookingNote');
+      const bookingDialog = document.getElementById('bookingDialog');
+      const bookingUrl = bookingLink.dataset.bookingUrl || '';
+      const placeholderBooking = !bookingUrl || bookingUrl.includes('REPLACE_WITH_YOUR_BOOKING_URL');
+      if (placeholderBooking) {
+        bookingLink.addEventListener('click', e => { e.preventDefault(); bookingDialog.showModal(); });
+        bookingLink.setAttribute('aria-haspopup','dialog');
+        bookingLink.removeAttribute('target');
+        bookingDialog.addEventListener('click', e => { if (e.target === bookingDialog) { const bounds = bookingDialog.getBoundingClientRect(); if (e.clientX < bounds.left || e.clientX > bounds.right || e.clientY < bounds.top || e.clientY > bounds.bottom) bookingDialog.close(); } });
+      } else {
+        bookingLink.href = bookingUrl;
+        bookingLink.target = '_blank';
+        bookingLink.rel = 'noopener noreferrer';
+        bookingNote.hidden = true;
+      }
     })();
   </script>
 </body>
