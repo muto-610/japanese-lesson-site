@@ -1,8 +1,15 @@
 
 name: Deploy Japanese with Ted
 
+
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+
 
 permissions:
   id-token: write
