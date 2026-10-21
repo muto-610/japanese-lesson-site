@@ -24,6 +24,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s index.html
+          grep -qi '<!DOCTYPE html' index.html
+          grep -qi '</html>' index.html
+          echo "HTML basic checks passed"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
