@@ -41,6 +41,14 @@ jobs:
           grep -qi '</html>' index.html
           echo "HTML basic checks passed"
       
+      - name: Lint HTML with HTMLHint
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes htmlhint \
+            --rules doctype-first,tag-pair,attr-no-duplication,id-unique \
+            index.html
+
       - name: Simulate CI failure
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.simulate_ci_failure }}
         shell: bash
