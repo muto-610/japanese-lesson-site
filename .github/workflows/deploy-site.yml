@@ -1,15 +1,19 @@
 
 name: Deploy Japanese with Ted
 
-
 on:
   workflow_dispatch:
+    inputs:
+      simulate_ci_failure:
+        description: "CI失敗をテストする"
+        required: false
+        default: false
+        type: boolean
   push:
     branches:
       - main
     paths:
       - index.html
-
 
 permissions:
   id-token: write
@@ -36,6 +40,13 @@ jobs:
           grep -qi '<!DOCTYPE html' index.html
           grep -qi '</html>' index.html
           echo "HTML basic checks passed"
+      
+      - name: Simulate CI failure
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.simulate_ci_failure }}
+        shell: bash
+        run: |
+          echo "CI failure test: stopping deployment"
+          exit 1
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
