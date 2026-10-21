@@ -78,7 +78,8 @@ jobs:
           COMMAND_ID=$(aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
-            --parameters '{"commands":["set -eu","runuser -u ec2-user -- git -C /home/ec2-user/japanese-lesson-site pull --ff-only origin main","mkdir -p /home/ec2-user/nginx-backups","cp -p /usr/share/nginx/html/index.html /home/ec2-user/nginx-backups/index.html.predeploy","install -m 644 /home/ec2-user/japanese-lesson-site/index.html /usr/share/nginx/html/index.html","code=$(curl -sS -o /dev/null -w \"%{http_code}\" --max-time 5 http://localhost/)","if [ \"$code\" != \"200\" ]; then cp -p /home/ec2-user/nginx-backups/index.html.predeploy /usr/share/nginx/html/index.html; echo \"HTTP check failed: $code; restored backup\"; exit 1; fi","echo \"Deploy OK: HTTP $code\""]}' \
+            --parameters  "$(jq -nc --arg sha "$GITHUB_SHA" \
+          '{commands:[("/usr/local/sbin/ted-deploy.sh " + $sha)]}')" \
             --query "Command.CommandId" \
             --output text)
 
