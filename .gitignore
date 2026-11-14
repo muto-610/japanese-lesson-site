@@ -1,0 +1,6 @@
+# Local dependency archives, test fixtures and preview logs.
+.lesson-room-tools/
+.pnpm-store/
+
+# Development-only LiveKit configuration. Never publish or commit this file.
+/config/livekit.local.json
